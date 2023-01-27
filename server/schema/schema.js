@@ -73,10 +73,26 @@ const RootQuery = new GraphQLObjectType({
             resolve(parent,args){
                 return lo.find(authors, {id:args.id});
             }
-        }
+        },
+
+        books:{
+            type:new GraphQLList(BookType),
+            resolve(parent,args){
+                return books;
+            }
+        },
+        authors:{
+            type:new GraphQLList(AuthorType),
+            resolve(parent,args){
+                return authors;
+            }
+        },
     }
 });
 
 module.export = new GraphQLSchema({
     query: RootQuery
 });
+
+// mongodb+srv://sahilsaini110:#Sahilsaini110@cluster0.qm4f15a.mongodb.net/?retryWrites=true&w=majority
+//  sahilsaini110 user
