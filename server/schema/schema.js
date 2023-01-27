@@ -1,7 +1,11 @@
 const graphql = require('graphql');
 const lo = require('lodash');
 
-const {GraphQLObjectType, GraphqlQLString, GraphQLSchema}=graphql;
+const {GraphQLObjectType, 
+    GraphqlQLString, 
+    GraphQLSchema,
+    GraphQLID
+}=graphql;
 
 // dummy data
 
@@ -14,7 +18,7 @@ var books = [
 const BookType = new GraphQLObjectType({
     name:'Book',
     fields:() =>({
-        id:{type: GraphqlQLString},
+        id:{type: GraphQLID},
         name:{type: GraphqlQLString},
         genre:{type: GraphqlQLString}
     })
@@ -26,7 +30,7 @@ const RootQuery = new GraphQLObjectType({
     fields:{
         book: {
             type:BookType,
-            args:{id:{type:GraphqlQLString}},
+            args:{id:{type: GraphQLID}},
             resolve(parent,args){
                 // code to get data from db / other resources
                return lo.find(books,{id:args.id});
